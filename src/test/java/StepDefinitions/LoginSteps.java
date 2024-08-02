@@ -13,14 +13,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import Locators.PageObjects;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import Utils.HelperClass;
 
 import java.time.Duration;
-import java.util.List;
 
 public class LoginSteps{
     PageObjects pg = new PageObjects();
@@ -28,7 +26,7 @@ public class LoginSteps{
 
     @Before
     public void startBrowser() {
-        WebDriverManager.chromedriver().setup();
+       WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -78,7 +76,7 @@ public class LoginSteps{
         }
     }
 
-    @And("user enters First Name, Last Name, Email, Phone and Message")
+    @And("user enters First Name, Last Name, Email, Phone, company and Message")
     public void userEntersFirstNameLastNameEmailPhoneAndMessage() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,4000)");
@@ -88,7 +86,25 @@ public class LoginSteps{
         driver.findElement(pg.emailIDField).sendKeys(HelperClass.generateRandomEmail());
         driver.findElement(pg.phoneNumField).sendKeys(HelperClass.generateRandomNum());
         driver.findElement(pg.companyName).sendKeys(HelperClass.generateRandomText());
-
+        driver.findElement(pg.messageBox).sendKeys(HelperClass.generateRandomText());
         Thread.sleep(2000);
+    }
+
+    @And("user selects country from dropdown and taps on submit")
+    public void userSelectsCountryFromDropdownAndTapsOnSubmit() {
+        WebElement ele = driver.findElement(pg.countryDropDown);
+        Select dropdown = new Select(ele);
+        dropdown.selectByIndex(0);
+
+        driver.findElement(pg.iAgreeCheckBox).click();
+        driver.switchTo().frame("a-hi2appofyonw");
+        driver.findElement(pg.iAgreeCheckBox).click();
+        driver.switchTo().defaultContent();
+
+        driver.findElement(pg.submitCTA).click();
+    }
+
+    @Then("user verifies Thank you message")
+    public void userVerifiesThankYouMessage() {
     }
 }
