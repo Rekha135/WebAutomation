@@ -12,7 +12,8 @@ Feature: Sogeti landing page
   Scenario: Verify services and automation selected
     Given user is on Sogeti landing page
     When user selects services and automation
-    And user enters First Name, Last Name, Email, Phone and Message 
+    And user enters First Name, Last Name, Email, Phone and Message
+
    
     
   
