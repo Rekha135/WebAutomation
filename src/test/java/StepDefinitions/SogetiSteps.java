@@ -20,7 +20,7 @@ import Utils.HelperClass;
 
 import java.time.Duration;
 
-public class LoginSteps{
+public class SogetiSteps{
     PageObjects pg = new PageObjects();
     public WebDriver driver;
 
@@ -94,13 +94,9 @@ public class LoginSteps{
     public void userSelectsCountryFromDropdownAndTapsOnSubmit() {
         WebElement ele = driver.findElement(pg.countryDropDown);
         Select dropdown = new Select(ele);
-        dropdown.selectByIndex(0);
+        dropdown.selectByValue("Argentina");
 
         driver.findElement(pg.iAgreeCheckBox).click();
-        driver.switchTo().frame("a-hi2appofyonw");
-        driver.findElement(pg.iAgreeCheckBox).click();
-        driver.switchTo().defaultContent();
-
         driver.findElement(pg.submitCTA).click();
     }
 
