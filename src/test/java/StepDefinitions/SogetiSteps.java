@@ -31,13 +31,11 @@ public class SogetiSteps{
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
-
     @After
     public void closeBrowser() {
         driver.close();
         driver.quit();
     }
-
     @Given("user is on Sogeti landing page")
     public void userIsOnSogetiLandingPage() {
         driver.get("https://www.sogeti.com/");
@@ -45,7 +43,7 @@ public class SogetiSteps{
     }
 
     @When("user selects services and automation")
-    public void userSelectsServicesAndAutomation() throws InterruptedException {
+    public void userSelectsServicesAndAutomation() {
         WebElement ele =  driver.findElement(pg.servicesTab);
         Actions actions = new Actions(driver);
         actions.moveToElement(ele).perform();
@@ -65,21 +63,23 @@ public class SogetiSteps{
         Actions actions = new Actions(driver);
         actions.moveToElement(ele).perform();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement linkElement = driver.findElement(pg.selectedAutomation);
-        boolean isSelected = linkElement.getAttribute("class").contains("selected  current expanded");
-        if (isSelected) {
+        WebElement automationLink = driver.findElement(pg.selectedAutomation);
+        boolean isSelected = automationLink.getAttribute("class").contains("selected  current expanded");
+        if (isSelected==true) {
             Assert.assertTrue(true,"Automation Link is selected");
         } else {
             Assert.fail("Automation Link is not selected");
         }
     }
-
-    @And("user enters First Name, Last Name, Email, Phone, company and Message")
-    public void userEntersFirstNameLastNameEmailPhoneAndMessage() throws InterruptedException {
+    @And("user scroll down to Contacts Us")
+    public void userScrollDownToContactsUs() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,4000)");
-
+        String actualContactText = (driver.findElement(pg.contactUsTitle)).getText();
+        Assert.assertEquals(actualContactText, "Contact us:");
+    }
+    @And("user enters First Name, Last Name, Email, Phone, company and Message")
+    public void userEntersFirstNameLastNameEmailPhoneAndMessage() throws InterruptedException {
         driver.findElement(pg.firstNameField).sendKeys(HelperClass.generateRandomText());
         driver.findElement(pg.lastNameField).sendKeys(HelperClass.generateRandomText());
         driver.findElement(pg.emailIDField).sendKeys(HelperClass.generateRandomEmail());
@@ -95,11 +95,18 @@ public class SogetiSteps{
         Select dropdown = new Select(ele);
         dropdown.selectByValue("Argentina");
 
-        driver.findElement(pg.iAgreeCheckBox).click();
         driver.findElement(pg.submitCTA).click();
     }
 
-    @Then("user verifies Thank you message")
-    public void userVerifiesThankYouMessage() {
+    @When("user clicks on worldwide")
+    public void userClicksOnWorldwide() {
+        driver.findElement(pg.worldWideDropDown).click();
+    }
+
+    @Then("user verifies all links are working")
+    public void userVerifiesAllLinksAreWorking() {
+
     }
 }
+
+
