@@ -7,7 +7,7 @@ Feature: Sogeti
     When user selects services and automation
     Then user verifies services and automation is selected
 
-  @testcase2 @test
+  @testcase2
   Scenario: Enter data in contact Us form
     Given user is on Sogeti landing page
     When user selects services and automation
@@ -15,7 +15,7 @@ Feature: Sogeti
     And user enters First Name, Last Name, Email, Phone, company and Message
     Then user selects country from dropdown and taps on submit
 
-  @testcase3
+  @testcase3 @test
   Scenario: Verify Worldwide - all Country in Sogeti links are working
     Given user is on Sogeti landing page
     When user clicks on worldwide

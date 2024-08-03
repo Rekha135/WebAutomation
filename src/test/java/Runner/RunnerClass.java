@@ -5,8 +5,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features= "src/test/resources/Features/Sogeti.feature",
 glue={"StepDefinitions"},
-plugin = {"pretty", "html:target/cucumber-reports.html"},
-tags= "@smoke")
+plugin = {"pretty", "html:target/reports.html"},
+tags= "@test")
 public class RunnerClass extends AbstractTestNGCucumberTests {
 
 }
