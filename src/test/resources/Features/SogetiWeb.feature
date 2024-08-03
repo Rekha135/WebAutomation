@@ -1,4 +1,3 @@
-@tag
 Feature: Sogeti
 
   @testcase1
