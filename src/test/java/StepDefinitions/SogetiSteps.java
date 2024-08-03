@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import Locators.PageObjects;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -20,6 +21,10 @@ import org.testng.Assert;
 import Utils.HelperClass;
 
 import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+
+import static Utils.HelperClass.getResponseCode;
 
 public class SogetiSteps{
     PageObjects pg = new PageObjects();
@@ -39,7 +44,7 @@ public class SogetiSteps{
     @Given("user is on Sogeti landing page")
     public void userIsOnSogetiLandingPage() {
         driver.get("https://www.sogeti.com/");
-        driver.findElement((By) pg.acceptCookies).click();
+        driver.findElement(pg.acceptCookies).click();
     }
 
     @When("user selects services and automation")
@@ -105,6 +110,21 @@ public class SogetiSteps{
 
     @Then("user verifies all links are working")
     public void userVerifiesAllLinksAreWorking() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            List<WebElement> links =  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='country-list-id']//ul//li//a")));
+
+           for (WebElement link : links) {
+               String url = link.getAttribute("href");
+                if (url != null && url.contains("/www.sogeti")) {
+                    int responseCode = getResponseCode(url);
+                    Assert.assertEquals(responseCode, 200, "Link is broken: " + url);
+                    System.out.println("Link is working: " + url);
+                }
+               }
+        } catch (Exception e) {
+            e.getMessage();
+        }
 
     }
 }

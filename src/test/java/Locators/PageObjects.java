@@ -23,6 +23,5 @@ public class PageObjects {
 	public By iAmNotRobotCheckBox = By.cssSelector(".g-recaptcha");
 	public By submitCTA = By.id("b35711ee-b569-48b4-8ec4-6476dbf61ef8");
 	public By worldWideDropDown = By.xpath("//span[@aria-label='Worldwide']");
-	public By countryList = By.xpath("//div[@id='country-list-id']");
-
+	public By countryList = By.xpath("//div[@id='country-list-id']//ul");
 }
