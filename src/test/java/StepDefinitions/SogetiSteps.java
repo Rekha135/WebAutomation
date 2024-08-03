@@ -70,10 +70,8 @@ public class SogetiSteps{
         boolean isSelected = linkElement.getAttribute("class").contains("selected  current expanded");
         if (isSelected) {
             Assert.assertTrue(true,"Automation Link is selected");
-            System.out.println("Automation Link is selected");
         } else {
             Assert.fail("Automation Link is not selected");
-            System.out.println("Automation Link is not selected");
         }
     }
 

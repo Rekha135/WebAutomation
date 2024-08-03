@@ -1,6 +1,5 @@
 @tag
 Feature: Sogeti landing page
-  I want to use this template for my feature file
 
   @tag1 @smoke
   Scenario: Verify services and automation selected
