@@ -1,12 +1,12 @@
 Feature: Sogeti
 
-  @testcase1
+  @testcase1  @test
   Scenario: Verify services and automation selected
     Given user is on Sogeti landing page
     When user selects services and automation
     Then user verifies services and automation is selected
 
-  @testcase2
+  @testcase2  @test
   Scenario: Enter data in contact Us form
     Given user is on Sogeti landing page
     When user selects services and automation

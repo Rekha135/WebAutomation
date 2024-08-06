@@ -26,7 +26,7 @@ import java.util.List;
 
 import static Utils.HelperClass.getResponseCode;
 
-public class SogetiSteps{
+public class SogetiWebSteps{
     PageObjects pg = new PageObjects();
     public WebDriver driver;
 
